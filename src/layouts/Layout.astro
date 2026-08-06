@@ -1,0 +1,46 @@
+---
+import '@chirag127/oz-tokens-base'
+import '@chirag127/oz-chrome/styles.css'
+import '@fontsource-variable/spline-sans'
+import '@fontsource-variable/spline-sans-mono'
+import '../styles/theme.css'
+import '../styles/studio.css'
+import OzToolShell from '@chirag127/oz-chrome/components/OzToolShell.astro'
+
+interface Props {
+  title?: string
+  description?: string
+}
+const {
+  title = 'oriz invoice — GST-aware invoice generator',
+  description = 'Free invoice generator: line items, auto totals + GST/tax, any currency, your logo, client details, print to PDF. INR number-to-words. 100% in your browser — no upload, no signup, no server.',
+} = Astro.props
+const canonical = new URL(Astro.url.pathname, Astro.site).href
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <OzToolShell site="invoice" title="invoice generator" themeColor="#0f5132">
+      <slot />
+      <Fragment slot="footer">
+        <a href="https://github.com/chirag127/oriz-invoice">source</a>
+        <span>100% client-side · no upload · no signup</span>
+      </Fragment>
+    </OzToolShell>
+  </body>
+</html>

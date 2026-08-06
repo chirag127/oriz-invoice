@@ -1,0 +1,163 @@
+:root {
+  /* ===== Ledger / fintech identity =====
+     Crisp accountant white, deep pine green, gold rule lines. Tabular-figure
+     numerics everywhere numbers live. Receipt-paper texture on the preview.
+     Precise, trustworthy, financial. Distinct from every other oriz site. */
+
+  /* color roles (contract override) */
+  --oz-bg: #f6f7f4;        /* faint warm ledger paper */
+  --oz-fg: #12211a;        /* deep ink, green-black */
+  --oz-surface: #ffffff;   /* pure ledger sheet */
+  --oz-muted: #5b6b63;     /* column-label grey-green */
+  --oz-border: #d8ded6;    /* hairline rule */
+  --oz-accent: #0f5132;    /* deep pine green — primary */
+  --oz-accent-fg: #ffffff;
+
+  /* chrome aliases (oz-chrome/styles.css reads these) */
+  --oz-paper: #ffffff;
+  --oz-paper-2: #eef1ec;
+  --oz-ink: #12211a;
+  --oz-ink-mute: #5b6b63;
+  --oz-rule: #d8ded6;
+  --oz-header-h: 4rem;
+  --oz-container: 78rem;
+  --oz-text-lg: 1.35rem;
+  --oz-text-md: 1rem;
+  --oz-text-sm: 0.875rem;
+  --oz-space-5: 1.25rem;
+  --oz-z-overlay: 1000;
+
+  /* bespoke ledger tokens */
+  --lg-green: #0f5132;
+  --lg-green-deep: #0a3a24;
+  --lg-green-soft: #e7f0ea;
+  --lg-gold: #b08420;       /* gold rule / accent line */
+  --lg-gold-soft: #f3e9cf;
+  --lg-paper: #ffffff;
+  --lg-well: #eef1ec;
+  --lg-ink: #12211a;
+  --lg-label: #5b6b63;
+  --lg-rule: #d8ded6;
+  --lg-rule-strong: #c2cabf;
+  --lg-danger: #a1341f;
+  --lg-shadow: 0 1px 2px rgba(15, 81, 50, 0.05), 0 10px 30px rgba(15, 81, 50, 0.08);
+  --lg-shadow-lift: 0 2px 6px rgba(15, 81, 50, 0.08), 0 22px 55px rgba(15, 81, 50, 0.14);
+
+  /* font slots — grotesk + tabular mono */
+  --oz-font-display: 'Spline Sans Variable', 'Spline Sans', system-ui, sans-serif;
+  --oz-font-body: 'Spline Sans Variable', 'Spline Sans', system-ui, sans-serif;
+  --oz-font-mono: 'Spline Sans Mono Variable', 'Spline Sans Mono', ui-monospace, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* night ledger: deep green-black desk, spotlit sheet */
+    --oz-bg: #0b120f;
+    --oz-fg: #e7efe9;
+    --oz-surface: #121b16;
+    --oz-muted: #8ba095;
+    --oz-border: #24322b;
+    --oz-accent: #48b17a;
+    --oz-accent-fg: #06110b;
+
+    --oz-paper: #121b16;
+    --oz-paper-2: #0e1712;
+    --oz-ink: #e7efe9;
+    --oz-ink-mute: #8ba095;
+    --oz-rule: #24322b;
+
+    --lg-green: #48b17a;
+    --lg-green-deep: #2f8d5c;
+    --lg-green-soft: #10241a;
+    --lg-gold: #d9b45a;
+    --lg-gold-soft: #2a2415;
+    --lg-paper: #121b16;
+    --lg-well: #0e1712;
+    --lg-ink: #e7efe9;
+    --lg-label: #8ba095;
+    --lg-rule: #24322b;
+    --lg-rule-strong: #33463b;
+    --lg-danger: #e08268;
+    --lg-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.55);
+    --lg-shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.55), 0 22px 55px rgba(0, 0, 0, 0.65);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light dark;
+  background: var(--oz-bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--oz-bg);
+  color: var(--oz-fg);
+  font-family: var(--oz-font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* tabular numerals fleet-wide */
+body {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+
+h1, h2, h3 {
+  font-family: var(--oz-font-display);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+  font-weight: 600;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--lg-green);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--lg-gold);
+  outline-offset: 2px;
+  border-radius: var(--oz-radius-s);
+}
+
+.wrap {
+  max-width: var(--oz-container);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* ledger eyebrow — mono, gold tick */
+.eyebrow {
+  font-family: var(--oz-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lg-label);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.eyebrow::before {
+  content: '';
+  width: 1.6rem;
+  height: 2px;
+  background: var(--lg-gold);
+}
+
+/* numbers use mono tabular */
+.num {
+  font-family: var(--oz-font-mono);
+  font-variant-numeric: tabular-nums;
+}
