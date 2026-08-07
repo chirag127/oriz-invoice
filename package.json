@@ -35,5 +35,13 @@
     "typescript": "^5.9.2",
     "vitest": "^3.2.4",
     "wrangler": "^4.42.0"
+  },
+  "allowScripts": {
+    "sharp@0.35.2": true,
+    "sharp@0.34.5": true,
+    "esbuild@0.27.7": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.1": true,
+    "workerd@1.20260801.1": true
   }
 }
