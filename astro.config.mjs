@@ -13,7 +13,7 @@ export default defineConfig({
     sitemap(),
     AstroPwa({
       registerType: 'autoUpdate',
-      injectRegister: 'auto',
+      injectRegister: 'script-defer',
       manifest: {
         id: '/',
         name: 'oriz Invoice',

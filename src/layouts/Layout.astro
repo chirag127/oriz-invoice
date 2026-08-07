@@ -28,6 +28,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href
     <link rel="canonical" href={canonical} />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <script src="/registerSW.js" defer></script>
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
