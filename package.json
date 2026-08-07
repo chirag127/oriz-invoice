@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
+    "icons": "node scripts/gen-icons.mjs",
     "deploy": "astro build && wrangler pages deploy dist --project-name oriz-invoice --branch main --commit-dirty=true"
   },
   "dependencies": {
@@ -29,6 +30,8 @@
   "devDependencies": {
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "@vite-pwa/astro": "^1.1.0",
+    "sharp": "^0.34.2",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4",
     "wrangler": "^4.42.0"
