@@ -1,0 +1,92 @@
+# oriz Invoice — full site content
+
+> Free GST invoice generator. https://invoice.oriz.in
+> 100% client-side: no upload, no signup, no server. Invoice data is stored only in localStorage on your device. Optional AI runs through the browser via a keyless multi-provider gateway; the tool works fully without it.
+
+## What it is
+
+oriz Invoice (invoice.oriz.in) is a free invoice generator for freelancers and small businesses, tuned for Indian GST but usable for any currency. Bill a client in seconds: add line items with live totals, apply GST-aware tax (CGST/SGST for intra-state or IGST for inter-state), choose from 9 currencies, drop in your logo, fill business + client details including GSTIN, then print to a clean PDF with the grand total spelled out in words. Everything runs in your browser — nothing is uploaded, there is no signup, and the invoice autosaves locally.
+
+## Hero
+
+Eyebrow: invoice.oriz.in · the ledger
+Headline: Free GST invoice generator
+Lede: Bill a client in seconds. Line items with live totals, GST-aware tax (CGST/SGST or IGST), any currency, your logo, and clean print-to-PDF — with the grand total spelled out in words. Everything stays in your browser: nothing is uploaded, no signup.
+Spec chips: auto totals + tax · INR / GST + 8 currencies · print → PDF · autosaves locally
+
+## Editor fields
+
+Invoice
+- Number — auto-incrementing invoice number (editable).
+- Date — invoice date (defaults to today).
+- Due date — optional payment due date.
+
+Currency & tax
+- Currency — pick one of: INR, USD, EUR, GBP, AED, AUD, CAD, SGD, JPY. Amounts format with the correct locale and symbol.
+- Tax mode — three buttons: No tax · CGST+SGST (intra-state) · IGST (inter-state). Intra-state splits tax into CGST + SGST; inter-state charges a single IGST line. "No tax" hides the per-line tax column.
+
+Logo
+- Click or drag-drop an image to set your logo; it previews inline and is embedded as a data URL. A Remove logo button clears it.
+
+From (your business)
+- Name, GSTIN, Email, Phone, Address.
+
+Bill to (client)
+- Name, GSTIN, Email, Phone, Address.
+
+Line items
+- Each row: Description, Qty, Rate, Tax % (per line, enabled only when a GST mode is on), and a live computed Amount. Add unlimited lines with "+ Add line"; remove any line (the last remaining line can't be removed).
+
+Adjustments
+- Discount % — percentage off the subtotal.
+- Shipping / other — a flat additional charge.
+
+Notes & terms
+- Notes — free text (bank details, PO reference, etc.).
+- Payment terms / scope — free text; defaults to "Payment due within 15 days. 1.5% monthly late fee on overdue balances."
+
+## Totals (computed live)
+
+Subtotal → minus discount → plus tax (by mode/rate, shown as a breakup) → plus shipping → Grand total. The grand total is also rendered in words: INR uses the Indian lakh/crore scale; other currencies use the western thousand/million scale.
+
+## Preview & export
+
+- Live preview — a receipt-paper rendering of the invoice updates as you type.
+- Print / Save PDF — a scoped print stylesheet prints only the receipt, so the browser's Save-as-PDF produces a clean document.
+- Export JSON — downloads the whole invoice as `<number>.json`.
+- Import — load a previously exported JSON to continue editing.
+- Reset — clears the invoice back to a fresh blank state (with confirmation).
+- Autosave — every edit is saved to localStorage under key `oriz-invoice/v1`; a "saved" flag flashes on change.
+
+## Optional AI draft
+
+An "AI draft" panel offers two one-click helpers:
+- Draft terms / scope — generates concise, professional payment-terms and scope-of-work notes (2–4 sentences with a payment window and late-fee note) based on your line items and client.
+- Suggest line wording — proposes a clear, professional line-item description (under 12 words).
+You can edit the draft, then "Use this" to accept it or "Discard". AI is lazy-loaded via `@chirag127/oz-ai` (g4f multi-provider failover, no API key) only when triggered, so it never touches first paint. If every provider is down it shows "AI unavailable right now" and the invoice keeps working without it.
+
+## Privacy
+
+100% client-side. There is no server and no account. Invoice data — including your logo — never leaves the browser; it is stored only in localStorage on your device. Export JSON if you want a portable copy. The only network calls are optional AI requests you explicitly trigger.
+
+## FAQ
+
+Is it free? Yes — free, no signup, no card.
+Does my data leave my device? No. Everything stays in your browser's localStorage; nothing is uploaded.
+How do I get a PDF? Click "Print / Save PDF" and choose Save as PDF in the browser print dialog.
+Does it support Indian GST? Yes — CGST+SGST for intra-state and IGST for inter-state, with per-line tax rates and a tax breakup.
+Which currencies work? INR, USD, EUR, GBP, AED, AUD, CAD, SGD, JPY.
+Can I install it? Yes — it's an installable PWA and works offline for the core tool.
+Do I need the AI? No. AI drafting is optional; the invoice is fully usable without it.
+
+## Tech
+
+Astro (static output) + React 19 islands + Tailwind v4. Shared atomic packages: `@chirag127/oz-tokens-base` (design tokens), `@chirag127/oz-chrome` (site chrome), `@chirag127/oz-file` (file read/drop/download/print helpers), `@chirag127/oz-ai` (keyless g4f AI client). Pure logic — totals, tax, number-to-words — is unit-tested with vitest. Installable PWA (Workbox precache + NetworkFirst for AI). Hosted on Cloudflare Pages at invoice.oriz.in.
+
+## Links
+
+- Live app: https://invoice.oriz.in
+- Info page: https://chirag127.github.io/oriz-invoice/
+- Source: https://github.com/chirag127/oriz-invoice
+- llms.txt: https://invoice.oriz.in/llms.txt
+- License: MIT © 2026 Chirag Singhal

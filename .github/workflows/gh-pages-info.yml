@@ -1,0 +1,30 @@
+name: gh-pages-info
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - gh-info/**
+      - .github/workflows/gh-pages-info.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages-info
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish gh-info/ to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./gh-info
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: "deploy: info page ${{ github.sha }}"

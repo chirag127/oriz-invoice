@@ -1,0 +1,27 @@
+# oriz Invoice
+
+> Free, GST-aware invoice generator that runs 100% in your browser. Build line items with live totals and per-line tax (CGST/SGST or IGST), pick any of 9 currencies, drop in your logo, and print to PDF with the grand total spelled out in words. No upload, no signup, no server — invoice data lives only in your browser's localStorage.
+
+## Pages
+
+- [Invoice studio](https://invoice.oriz.in/): the single-page app — editor on the left, live receipt-paper preview on the right, export/import + print controls.
+
+## Features
+
+- [Line items](https://invoice.oriz.in/): description, quantity, rate, per-line tax %, live per-line amount; add/remove rows.
+- [Auto totals](https://invoice.oriz.in/): subtotal, discount %, tax, shipping/other, grand total — recomputed live.
+- [GST tax modes](https://invoice.oriz.in/): No tax · CGST+SGST (intra-state) · IGST (inter-state), with tax breakup by rate.
+- [Currency](https://invoice.oriz.in/): INR, USD, EUR, GBP, AED, AUD, CAD, SGD, JPY with locale-correct formatting.
+- [Amount in words](https://invoice.oriz.in/): INR-aware lakh/crore scale, western scale for other currencies.
+- [Logo](https://invoice.oriz.in/): click or drag-drop an image; stored inline as a data URL.
+- [Parties](https://invoice.oriz.in/): from (your business) + bill-to (client) with name, GSTIN, email, phone, address.
+- [Print to PDF](https://invoice.oriz.in/): scoped print stylesheet renders a clean receipt-paper document via the browser's Save-as-PDF.
+- [Export / import JSON](https://invoice.oriz.in/): download the invoice as JSON, re-import to continue later.
+- [Autosave](https://invoice.oriz.in/): every edit persists to localStorage on your device.
+- [Optional AI draft](https://invoice.oriz.in/): draft payment-terms/scope or suggest line wording via @chirag127/oz-ai (g4f multi-provider, no key); degrades gracefully when offline.
+
+## About
+
+- [Project info page](https://chirag127.github.io/oriz-invoice/): what oriz-invoice is, features, tech, and links.
+- [Source code](https://github.com/chirag127/oriz-invoice): MIT-licensed, Astro + React 19 + Tailwind v4.
+- [Full LLM text](https://invoice.oriz.in/llms-full.txt): complete site content as clean markdown for AI ingestion.

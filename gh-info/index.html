@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About oriz Invoice — free GST invoice generator</title>
+    <meta
+      name="description"
+      content="About oriz Invoice: a free, 100% in-browser GST invoice generator. Line items, tax (CGST/SGST or IGST), multi-currency, print to PDF. No upload, no signup."
+    />
+    <link rel="canonical" href="https://chirag127.github.io/oriz-invoice/" />
+    <style>
+      :root {
+        --bg: #0f141a;
+        --card: #171d25;
+        --fg: #e7ecf1;
+        --muted: #9aa7b4;
+        --line: #263039;
+        --accent: #3ba676;
+        --accent-2: #d9b25a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+      .badge {
+        display: inline-block;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.25rem 0.7rem;
+        margin-bottom: 1.25rem;
+      }
+      h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); margin: 0 0 0.5rem; line-height: 1.15; }
+      .tagline { color: var(--muted); font-size: 1.1rem; margin: 0 0 1.75rem; }
+      .cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin: 0 0 2.5rem;
+      }
+      .btn {
+        display: inline-block;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.92rem;
+        border: 1px solid var(--line);
+        color: var(--fg);
+        background: var(--card);
+      }
+      .btn--primary { background: var(--accent); color: #06110b; border-color: transparent; }
+      h2 { font-size: 1.15rem; margin: 2.25rem 0 0.75rem; }
+      ul { margin: 0.5rem 0 0; padding-left: 1.2rem; }
+      li { margin: 0.3rem 0; }
+      .tech { color: var(--muted); }
+      code {
+        background: #0b0f14;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        padding: 0.1rem 0.4rem;
+        font-size: 0.85em;
+      }
+      a { color: var(--accent); }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .note {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--accent-2);
+        border-radius: 8px;
+        padding: 0.9rem 1.1rem;
+        margin: 1.5rem 0;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <span class="badge">About this project</span>
+      <h1>oriz Invoice</h1>
+      <p class="tagline">
+        Invoice generator — line items, tax, INR/GST, print → PDF. Free, in your browser.
+      </p>
+
+      <div class="cta">
+        <a class="btn btn--primary" href="https://invoice.oriz.in">Open the live app →</a>
+        <a class="btn" href="https://github.com/chirag127/oriz-invoice">Source on GitHub</a>
+        <a class="btn" href="https://invoice.oriz.in/llms.txt">llms.txt</a>
+      </div>
+
+      <p class="note">
+        This is the project info page. The actual tool lives at
+        <a href="https://invoice.oriz.in">invoice.oriz.in</a> — this page just
+        explains what it is.
+      </p>
+
+      <h2>What it is</h2>
+      <p>
+        A free invoice generator for freelancers and small businesses, tuned for
+        Indian GST but usable for any currency. Add line items with live totals,
+        apply GST-aware tax, pick a currency, add your logo, and print a clean PDF —
+        all without an account.
+      </p>
+
+      <h2>Key features</h2>
+      <ul>
+        <li>Line items with description, qty, rate, per-line tax %, live amount</li>
+        <li>Auto totals — subtotal, discount, tax, shipping, grand total</li>
+        <li>GST modes — No tax · CGST+SGST (intra-state) · IGST (inter-state), with tax breakup</li>
+        <li>9 currencies — INR, USD, EUR, GBP, AED, AUD, CAD, SGD, JPY (locale-correct)</li>
+        <li>Grand total in words — INR lakh/crore scale, western scale for others</li>
+        <li>Your logo, business + client details incl. GSTIN</li>
+        <li>Print → PDF, plus export / import invoice as JSON</li>
+        <li>Autosaves to your browser; optional AI to draft terms / line wording</li>
+      </ul>
+
+      <h2>Tech</h2>
+      <p class="tech">
+        Client-only <strong>Astro</strong> + React 19 islands + Tailwind v4.
+        Optional AI via <code>@chirag127/oz-ai</code> (g4f, keyless).
+        <strong>PWA-installable</strong> and <strong>100% in-browser</strong> —
+        no upload, no signup, no server. Invoice data stays in your browser's
+        localStorage.
+      </p>
+
+      <footer>
+        Live app: <a href="https://invoice.oriz.in">invoice.oriz.in</a> ·
+        Source: <a href="https://github.com/chirag127/oriz-invoice">github.com/chirag127/oriz-invoice</a> ·
+        MIT © 2026 Chirag Singhal
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,12 +1,16 @@
 # oriz-invoice
 
-GST-aware invoice generator. Live: **https://invoice.oriz.in**
+Free GST-aware invoice generator. 100% in your browser.
+
+- **Live app:** https://invoice.oriz.in
+- **About / info:** https://chirag127.github.io/oriz-invoice/
+- **llms.txt:** https://invoice.oriz.in/llms.txt
 
 Line items with live totals, tax (CGST/SGST or IGST), multi-currency, your logo,
 client details, print → PDF, amount-in-words. Autosaves to your browser.
 
-**100% client-side — no upload, no signup, no server.** Your invoice data never
-leaves the browser; it is stored only in `localStorage` on your device.
+**100% client-side — no upload, no signup, no server, free.** Your invoice data
+never leaves the browser; it is stored only in `localStorage` on your device.
 
 ## Features
 
@@ -22,11 +26,12 @@ leaves the browser; it is stored only in `localStorage` on your device.
 - Autosave to `localStorage`
 - Optional AI (via `@chirag127/oz-ai`, g4f multi-provider failover, no key): draft payment terms / scope + suggest line wording. Degrades gracefully if offline.
 
-## Stack
+## Tech
 
 Astro (static) + React 19 islands + Tailwind v4. Shared atomic packages:
 `@chirag127/oz-tokens-base`, `@chirag127/oz-chrome`, `@chirag127/oz-file`,
-`@chirag127/oz-ai`. Pure logic (totals, tax, number-to-words) is unit-tested with vitest.
+`@chirag127/oz-ai`. Pure logic (totals, tax, number-to-words) unit-tested with vitest.
+Installable PWA. Hosted on Cloudflare Pages.
 
 ## Develop
 
