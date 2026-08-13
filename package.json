@@ -22,7 +22,7 @@
     "@fontsource-variable/spline-sans": "^5.2.5",
     "@fontsource-variable/spline-sans-mono": "^5.2.5",
     "@tailwindcss/vite": "^4.1.13",
-    "astro": "^6.4.8",
+    "astro": "^7.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.13"
