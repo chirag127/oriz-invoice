@@ -17,7 +17,7 @@
     "@astrojs/sitemap": "^3.6.0",
     "@chirag127/oz-ai": "^0.3.3",
     "@chirag127/oz-chrome": "file:../design-system/packages/oz-chrome",
-    "@chirag127/oz-file": "file:../design-system/packages/oz-file",
+    "@chirag127/oz-file": "^0.1.0",
     "@chirag127/oz-tokens-base": "^0.1.0",
     "@fontsource-variable/spline-sans": "^5.2.5",
     "@fontsource-variable/spline-sans-mono": "^5.2.5",
