@@ -13,7 +13,7 @@
     "deploy": "astro build && wrangler pages deploy dist --project-name oriz-invoice --branch main --commit-dirty=true"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.0",
+    "@astrojs/react": "^6.0.2",
     "@astrojs/sitemap": "^3.6.0",
     "@chirag127/oz-ai": "^0.3.3",
     "@chirag127/oz-chrome": "file:../design-system/packages/oz-chrome",
@@ -22,7 +22,7 @@
     "@fontsource-variable/spline-sans": "^5.2.5",
     "@fontsource-variable/spline-sans-mono": "^5.2.5",
     "@tailwindcss/vite": "^4.1.13",
-    "astro": "^6.4.8",
+    "astro": "^7.2.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.13"
@@ -31,10 +31,10 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vite-pwa/astro": "^1.1.0",
-    "sharp": "^0.34.2",
-    "typescript": "^5.9.2",
-    "vitest": "^3.2.4",
-    "wrangler": "^4.42.0"
+    "sharp": "^0.35.3",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10",
+    "wrangler": "^4.123.0"
   },
   "allowScripts": {
     "sharp@0.35.2": true,
