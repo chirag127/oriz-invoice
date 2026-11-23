@@ -133,3 +133,98 @@ describe('nextInvoiceNumber', () => {
     expect(nextInvoiceNumber()).toMatch(/-001$/)
   })
 })
+
+// ---- money invariants & edge cases ----
+
+describe('computeTotals invariants', () => {
+  const items: LineItem[] = [
+    item({ qty: 3, rate: 100.01, taxPct: 5 }),
+    item({ qty: 1, rate: 249.99, taxPct: 18 }),
+    item({ qty: 2, rate: 33.33, taxPct: 12 }),
+  ]
+
+  it('CGST + SGST always reconstruct taxTotal exactly (intra)', () => {
+    const t = computeTotals(items, meta({ gstMode: 'intra' }))
+    expect(round2(t.cgst + t.sgst)).toBe(t.taxTotal)
+    // split never rounds the halves apart by more than a cent
+    expect(Math.abs(t.cgst - t.sgst)).toBeLessThanOrEqual(0.01)
+    expect(t.igst).toBe(0)
+  })
+
+  it('grandTotal == taxable + taxTotal + shipping (no drift)', () => {
+    const t = computeTotals(items, meta({ gstMode: 'inter', shipping: 40.5 }))
+    expect(t.grandTotal).toBe(round2(t.taxable + t.taxTotal + t.shipping))
+    expect(t.igst).toBe(t.taxTotal)
+  })
+
+  it('per-rate breakup tax sums to taxTotal', () => {
+    const t = computeTotals(items, meta())
+    const summed = round2(t.taxBreakup.reduce((s, b) => s + b.tax, 0))
+    expect(summed).toBe(t.taxTotal)
+  })
+
+  it('empty invoice is all zeros', () => {
+    const t = computeTotals([], meta())
+    expect(t).toMatchObject({ subtotal: 0, taxable: 0, taxTotal: 0, grandTotal: 0 })
+    expect(t.taxBreakup).toEqual([])
+  })
+
+  it('100% discount zeroes taxable and tax', () => {
+    const t = computeTotals([item({ rate: 1000, taxPct: 18 })], meta({ discountPct: 100 }))
+    expect(t.discount).toBe(1000)
+    expect(t.taxable).toBe(0)
+    expect(t.taxTotal).toBe(0)
+    expect(t.grandTotal).toBe(0)
+  })
+
+  it('clamps out-of-range discount to 100%', () => {
+    const t = computeTotals([item({ rate: 500, taxPct: 0 })], meta({ gstMode: 'none', discountPct: 999 }))
+    expect(t.taxable).toBe(0)
+  })
+
+  it('ignores negative shipping (clamped to 0)', () => {
+    const t = computeTotals([item({ rate: 100, taxPct: 0 })], meta({ gstMode: 'none', shipping: -50 }))
+    expect(t.grandTotal).toBe(100)
+  })
+
+  it('non-finite / negative tax rate treated as 0%', () => {
+    const t = computeTotals([item({ rate: 100, taxPct: -5 }), item({ rate: 100, taxPct: NaN })], meta())
+    expect(t.taxTotal).toBe(0)
+    expect(t.grandTotal).toBe(200)
+  })
+})
+
+describe('round2 edge cases', () => {
+  it('is idempotent', () => {
+    expect(round2(round2(2.675))).toBe(round2(2.675))
+  })
+  it('handles negatives and zero', () => {
+    expect(round2(-1.005)).toBe(-1) // -1.005 -> -1.00 under EPSILON-nudged half-up
+    expect(round2(0)).toBe(0)
+  })
+})
+
+describe('formatMoney currency handling', () => {
+  it('falls back to INR for unknown currency code', () => {
+    expect(formatMoney(1000, 'ZZZ')).toBe(formatMoney(1000, 'INR'))
+  })
+  it('JPY has no fraction digits', () => {
+    expect(formatMoney(1000, 'JPY')).not.toContain('.')
+  })
+  it('USD formats with cents', () => {
+    expect(formatMoney(1234.5, 'USD')).toContain('1,234.50')
+  })
+})
+
+describe('amountToWords edge cases', () => {
+  it('prefixes Minus for negative amounts', () => {
+    expect(amountToWords(-5, 'INR')).toBe('Minus Rupees Five only')
+  })
+  it('omits paise/cents when zero', () => {
+    expect(amountToWords(100, 'INR')).toBe('Rupees One Hundred only')
+    expect(amountToWords(100, 'USD')).toBe('USD One Hundred only')
+  })
+  it('USD cents use western words', () => {
+    expect(amountToWords(1.25, 'USD')).toBe('USD One and Cents Twenty Five only')
+  })
+})

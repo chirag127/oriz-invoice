@@ -1,0 +1,28 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # invoice logic is framework-free; install vitest only to avoid the
+      # file:../design-system path deps and astro peer-conflicts.
+      - run: npm install --no-save vitest@^3.2.4
+
+      - run: npx vitest run
